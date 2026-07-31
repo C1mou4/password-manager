@@ -1,0 +1,24 @@
+{
+	"name": "template-react-app",
+	"version": "1.0.0",
+	"description": "",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dep": "npm i && npm update && concurrently \"cd back && npm install\" \" cd front && npm install\" && npm audit",
+		"dev": "concurrently \"cd back && nodemon index.js\" \" cd front && npm run dev\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+htps://github.com/All4Team/Template-React-App.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"concurrently": "^10.0.4",
+		"nodemon": "^3.1.14"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.6"
+	}
+}
