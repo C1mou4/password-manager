@@ -5,7 +5,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dep": "npm i && npm update && concurrently \"cd back && npm install\" \" cd front && npm install\" && npm audit",
-		"dev": "concurrently \"cd back && nodemon index.js\" \" cd front && npm run dev\""
+		"dev": "concurrently \"cd back/server && nodemon server.js\" \" cd front && npm run dev\""
 	},
 	"repository": {
 		"type": "git",
@@ -16,6 +16,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"concurrently": "^10.0.4",
+		"mysql2": "^3.23.2",
 		"nodemon": "^3.1.14"
 	},
 	"devDependencies": {

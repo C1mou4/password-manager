@@ -1,39 +1,23 @@
 import { useState } from "react";
+import { Button } from "../components/ui/button";
 import "./App.css";
 
 function App() {
-  const [rep, setRep] = useState<string | null>(null)
+	const fetchData = async () => {
+		const rep = await fetch("/create");
+		const data = await rep.json();
+		console.clear();
+		console.log(data);
+	};
+	return (
+		<>
+			<h1>Mots de passes</h1>
 
-  const testFetch = async () => {
-    const reponse = await fetch("/test");
-
-    if (!reponse.ok) {
-      console.log("test erreur");
-      setRep(null)
-    } else {
-      const data = await reponse.json();
-		console.log(data)
-        if (typeof data === 'string' || data === null) {
-        setRep(data);
-      } else {
-        setRep(data.message || JSON.stringify(data));
-      }
-    }
-  };
-
-  return (
-      <section id="center">
-          <h1>Get started</h1>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => testFetch()}
-        >
-        Requête : {rep}
-        </button>
-        <p className="text-red-400">Test</p>
-      </section>
-  );
+			<Button variant={"outline"} onClick={() => fetchData()}>
+				Création
+			</Button>
+		</>
+	);
 }
 
 export default App;
