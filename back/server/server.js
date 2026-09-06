@@ -1,27 +1,41 @@
-const express = require("express");
+import cors from "cors";
+import express from "express";
+import db from "./database.js";
+
 const app = express();
 const port = 3006;
 
-// Import des routes
-const routes = require("./routes/passwordRoutes");
-
-// Middleware
 app.use(express.json());
+app.use(cors());
 
-// Routes
-app.get("/", (req, res) => {
+// Route de base test
+app.get("/", (_req, res) => {
 	res.send("🚀 Backend Password Manager");
 });
 
-app.use("/api/passwords", routes);
+// Route de création test
+app.get("/test", (_req, res) => {
+	res.send({ message: "OK" });
+	console.clear();
+	console.log("API OK");
+});
 
-// Démarrage du serveur
+// Enregistrement d'un mot de passe
+app.post("/create", (req, res) => {
+	const { login, password } = req.body;
+	const query = "INSERT INTO password (login, password) VALUES (?, ?)";
+	db.query(query, [login, password]);
+	res.send(`Mot de passe créer : ${login} ${password}`);
+});
+
+app.put("/delete", (req, res) => {
+	const { id } = req.body;
+	const requete = `DELETE FROM password WHERE id = ${id}`;
+	db.query(requete);
+	res.send("Mot de passe supprimé");
+});
+
+// Lancement du backend
 app.listen(port, () => {
 	console.log(`🚀 Serveur démarré sur http://localhost:${port}`);
-	console.log(`📝 Routes disponibles:`);
-	console.log(`  GET  /api/passwords/create-table - Créer la table`);
-	console.log(`  POST /api/passwords/add - Ajouter un mot de passe`);
-	console.log(`  GET  /api/passwords/all - Récupérer tous les mots de passe`);
-	console.log(`  DELETE /api/passwords/:id - Supprimer un mot de passe`);
-	console.log(`  DELETE /api/passwords/drop-table - Supprimer la table`);
 });
