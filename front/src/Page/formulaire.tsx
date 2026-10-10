@@ -2,12 +2,7 @@ import { Button } from "@base-ui/react/button";
 import { Input } from "@base-ui/react/input";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { Card } from "../../components/ui/card";
-import {
-	Field,
-	FieldGroup,
-	FieldLegend,
-	FieldSet,
-} from "../../components/ui/field";
+import { Field, FieldGroup, FieldLegend, FieldSet } from "../../components/ui/field";
 
 export type identifiants = {
 	login: string;
